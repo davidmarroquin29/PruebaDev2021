@@ -14,7 +14,7 @@ func newTranslator(inFormat format, outFormat format) translator{
 
 func (t translator) Translate(input string)(string, error){
 
-	text, _ := t.inFormat.translateFromText(input)
+	text, _ := t.inFormat.translateToText(input)
 
 	result, _ := t.outFormat.translateFromText(text)
 

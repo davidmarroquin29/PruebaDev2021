@@ -14,11 +14,14 @@ func NewFormat (charList map[string]string) format{
 }
 
 func (f format) translateToText(input string) (string, error){
-	text := decodeMessage(input, "")
+	text := input
+	if f.charList != nil{
+		text = decodeMessage(input, " ")
+	}
 	return text, nil
 }
 
 func (f format) translateFromText(input string) (string, error){
-	res := encodeMessage(input, "", f.charList)
+	res := encodeMessage(input, " ", f.charList)
 	return res, nil
 }

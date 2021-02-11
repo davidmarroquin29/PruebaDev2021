@@ -27,6 +27,7 @@ var morseChars = map[string]string{
 	"X": "-..-",
 	"Y": "-.--",
 	"Z": "--..",
+	" ": "  ",
 }
 
 var binaryChars = map[string]string{
@@ -84,6 +85,7 @@ var binaryChars = map[string]string{
 	"x": "01111000",
 	"y": "01111001",
 	"z": "01111010",
+	" ": "  ",
 }
 
 

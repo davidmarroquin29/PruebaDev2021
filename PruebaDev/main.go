@@ -1,8 +1,10 @@
 package main
 
 import (
+	translator2 "PruebaDev/translator"
+	"bufio"
 	"fmt"
-	translator2 "pruebadev/translator"
+	"os"
 )
 
 func main(){
@@ -10,22 +12,36 @@ func main(){
 
 	var inText string
 	fmt.Println("Ingrese texto a traducir:")
-	fmt.Scan(&inText)
+	scanner := bufio.NewScanner(os.Stdin)
+	if scanner.Scan(){
+		inText = scanner.Text()
+	}
+
 
 	var inFormat string
-	fmt.Println("Ingrese Formato Origen:")
-	fmt.Scan(&inFormat)
+	fmt.Println("Ingrese Formato Origen (TEXT, MORSE, BINARY):")
+	if scanner.Scan(){
+		inFormat = scanner.Text()
+	}
 
 	var outFormat string
-	fmt.Println("Ingrese Formato Salida:")
-	fmt.Scan(&outFormat)
+	fmt.Println("Ingrese Formato Salida (TEXT, MORSE, BINARY):")
+	if scanner.Scan(){
+		outFormat = scanner.Text()
+	}
 
-	translator, err := translator2.GetTranslator(inFormat, outFormat)
+
+	//TEST
+	//inText := "test"
+	//inFormat := "TEXT"
+	//outFormat := "BINARY"
+
+	translt, err := translator2.GetTranslator(inFormat, outFormat)
 	if err != nil{
 		fmt.Println("Ocurrió un error:")
 		fmt.Println(err)
 	}else{
-		outText, err := translator.Translate(inText)
+		outText, err := translt.Translate(inText)
 		fmt.Println("El resultado es:")
 		fmt.Println(outText)
 

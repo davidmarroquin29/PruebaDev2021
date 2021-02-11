@@ -2,6 +2,7 @@ package translator
 
 import (
 	"errors"
+	"strings"
 )
 
 func GetTranslator (inFormat, outFormat string) (iTranslator, error){
@@ -9,7 +10,11 @@ func GetTranslator (inFormat, outFormat string) (iTranslator, error){
 	var formatIn format
 	var formatOut format
 
-	switch inFormat {
+	if strings.ToUpper(inFormat) == strings.ToUpper(outFormat){
+		return nil, errors.New("In and Out Format cant be the same")
+	}
+
+	switch strings.ToUpper(inFormat) {
 	case "TEXT":
 		formatIn = NewFormat(nil)
 	case "BINARY":
@@ -20,7 +25,7 @@ func GetTranslator (inFormat, outFormat string) (iTranslator, error){
 		return nil, errors.New("Invalid In Format")
 	}
 
-	switch outFormat {
+	switch strings.ToUpper(outFormat) {
 	case "TEXT":
 		formatOut = NewFormat(nil)
 	case "BINARY":
